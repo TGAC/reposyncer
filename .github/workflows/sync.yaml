@@ -1,0 +1,38 @@
+name: Sync mirrors
+on:
+  schedule:
+    - cron: "0 0 * * 0"
+  workflow_dispatch:
+
+jobs:
+  repo-sync:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - upstream_repo_owner: jameswilsenach
+            upstream_repo_name: FlowFI
+            upstream_repo_branch: main
+    name: Sync a repo from upstream
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout our fork of ${{ matrix.upstream_repo_name }}
+        uses: actions/checkout@v4
+        with:
+          repository: TGAC/${{ matrix.upstream_repo_name }}
+          token: ${{ secrets.PAT }}  # So we can push to it
+          ref: ${{ matrix.upstream_repo_branch }}
+      - name: Pull from upstream repo and push to our fork
+        run: |
+          git remote add upstream "https://github.com//${{ matrix.upstream_repo_owner }}/${{ matrix.upstream_repo_name }}"
+          git pull upstream "${{ matrix.upstream_repo_branch}}"
+          git push origin "${{ matrix.upstream_repo_branch}}"
+
+  keepalive-job:
+    name: Keepalive workflow
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: gautamkrishnar/keepalive-workflow@v2
