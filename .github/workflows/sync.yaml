@@ -10,8 +10,8 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - upstream_repo_owner: jameswilsenach
-            upstream_repo_name: FlowFI
+          - upstream_repo_owner: Mills33
+            upstream_repo_name: Basecall2Assembly
             upstream_repo_branch: main
     name: Sync a repo from upstream
     runs-on: ubuntu-latest
