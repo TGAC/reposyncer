@@ -3,7 +3,8 @@ on:
   schedule:
     - cron: "0 0 * * 0"
   workflow_dispatch:
-
+env:
+  OWNER: TGAC
 jobs:
   repo-sync:
     strategy:
@@ -22,13 +23,20 @@ jobs:
     name: Sync a repo from upstream
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout our fork of ${{ matrix.upstream_repo_name }}
+      - name: Fork the upstream repo, if necessary
+        run: |
+          if ! git ls-remote "https://github.com/${{ env.OWNER }}/${{ matrix.upstream_repo_name }}"; then
+            gh repo fork "https://github.com/${{ matrix.upstream_repo_owner }}/${{ matrix.upstream_repo_name }}" --clone=false --fork-name="${{ matrix.upstream_repo_name }}" --org="${{ env.OWNER }}"
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.PAT }}
+      - name: Checkout our fork
         uses: actions/checkout@v4
         with:
-          repository: TGAC/${{ matrix.upstream_repo_name }}
+          repository: ${{ env.OWNER }}/${{ matrix.upstream_repo_name }}
           token: ${{ secrets.PAT }}  # So we can push to it
           ref: ${{ matrix.upstream_repo_branch }}
-      - name: Pull from upstream repo and push to our fork
+      - name: Pull from the upstream repo and push to our fork
         run: |
           git remote add upstream "https://github.com//${{ matrix.upstream_repo_owner }}/${{ matrix.upstream_repo_name }}"
           git pull upstream "${{ matrix.upstream_repo_branch}}"
