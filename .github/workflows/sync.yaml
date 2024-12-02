@@ -23,7 +23,6 @@ jobs:
           - upstream_repo_owner: apduncan
             upstream_repo_name: cvanmf
             upstream_repo_branch: main
-  
     name: Sync a repo from upstream
     runs-on: ubuntu-latest
     steps:
