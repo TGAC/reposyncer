@@ -23,6 +23,9 @@ jobs:
           - upstream_repo_owner: apduncan
             upstream_repo_name: cvanmf
             upstream_repo_branch: main
+          - upstream_repo_owner: aioue
+            upstream_repo_name: pocket-nebula
+            upstream_repo_branch: main
     name: Sync a repo from upstream
     runs-on: ubuntu-latest
     steps:
