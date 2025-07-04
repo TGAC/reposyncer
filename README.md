@@ -10,5 +10,5 @@ If you'd like to have your repository mirrored on the [Earlham Institute GitHub 
 please:
 1. Fork this repository.
 2. Modify the `.github/workflows/sync.yaml` file by adding a new job configuration to the matrix of the `repo-sync` job
-as in [these lines](https://github.com/TGAC/reposyncer/blob/main/.github/workflows/sync.yaml#L13-L15).
-3. Open a pull request.
+as in [these lines](https://github.com/TGAC/reposyncer/blob/main/.github/workflows/sync.yaml#L14-L16).
+3. Open a [pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork).
