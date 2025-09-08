@@ -26,6 +26,9 @@ jobs:
           - upstream_repo_owner: aioue
             upstream_repo_name: pocket-nebula
             upstream_repo_branch: main
+          - upstream_repo_owner: richardmleggett
+            upstream_repo_name: MARTi
+            upstream_repo_branch: main
     name: Sync a repo from upstream
     runs-on: ubuntu-latest
     steps:
