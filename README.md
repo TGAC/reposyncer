@@ -2,6 +2,10 @@
 
 A simple GitHub workflow to regularly sync multiple repository mirrors (i.e. identical forks).
 
+All mirrors are synced in parallel.
+Each mirror is forked from its upstream repository, if necessary.
+The GitHub workflow is scheduled to automatically run once a week (on Sunday), but can also be triggered manually.
+
 Note that the workflow uses a simple `git push` (i.e. it does NOT force push) to the mirror.
 This means that if commits were force-pushed to the upstream repository branch which would overwrite existing commits in the mirror, the sync job for this repo will fail and the mirror will need to be synced manually.
 This is on purpose, and we recommend not force-pushing to the main branch of your repository.
