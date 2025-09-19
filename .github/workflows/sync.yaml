@@ -40,7 +40,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.PAT }}
       - name: Checkout our fork
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: ${{ env.OWNER }}/${{ matrix.upstream_repo_name }}
           token: ${{ secrets.PAT }}  # So we can push to it
